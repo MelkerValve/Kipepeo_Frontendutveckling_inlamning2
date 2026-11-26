@@ -5,15 +5,31 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kryptering</title>
-  <script src="Ascii.js"></script>
+  <!-- Ladda filerna i rätt ordning -->
+
 </head>
 
 <body>
   <h1>Kryptering</h1>
-  <form name="passwordform" method="get">
-    <input type="text" id="password" name="password">
-    <input type="submit" onclick="asciiShift()">
+  <form id="passwordform" name="passwordform">
+    <input type="text" id="password" name="password" placeholder="Skriv Lösenord">
+    <button type="submit"> Kryptera </button>
   </form>
+
+  <p>Resultat: <strong id="result"></strong></p>
+
+  <script src="ascii.js"></script>
+  <script src="salt.js"></script>
+
+  <script>
+    document.getElementById('passwordform').addEventListener('submit', function (event) {
+      event.preventDefault();
+      const losenord = document.getElementById('password').value;
+      const asciiResult = ascii(losenord);
+      const saltatResult = salt(asciiResult);
+      document.getElementById('result').textContent = saltatResult;
+    });
+  </script>
 </body>
 
 </html>
